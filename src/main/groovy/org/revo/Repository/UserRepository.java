@@ -10,9 +10,9 @@ import java.util.Optional;
  * Created by ashraf on 30/08/16.
  */
 public interface UserRepository extends MongoRepository<User, String> {
-    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
 
-    List<User> findByUsernameRegexOrNameRegexOrAboutRegexOrPhoneRegex(String r0, String r2, String r3, String r4);
+    List<User> findByEmailRegexOrNameRegexOrAboutRegexOrPhoneRegex(String r0, String r2, String r3, String r4);
 
     Optional<User> findByPhone(String phone);
 }

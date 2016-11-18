@@ -14,7 +14,7 @@ public interface UserService {
 
     User current();
 
-    Optional<User> findByUsername(String s);
+    Optional<User> findByEmail(String s);
 
     Optional<User> findByPhone(String phone);
 

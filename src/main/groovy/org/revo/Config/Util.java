@@ -47,7 +47,7 @@ public class Util {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return s -> userService.findByUsername(s).orElseThrow(() -> new UsernameNotFoundException(""));
+        return s -> userService.findByEmail(s).orElseThrow(() -> new UsernameNotFoundException(""));
     }
 
     @Bean

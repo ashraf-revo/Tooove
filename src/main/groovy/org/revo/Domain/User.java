@@ -8,7 +8,6 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -30,7 +29,7 @@ public class User extends AbstractUser {
     private String name;
     @NotBlank
     @Indexed(unique = true)
-    private String username;
+    private String email;
     @NotBlank
     @Indexed(unique = true)
     @Pattern(regexp = "[0-9]{5,15}", message = "enter valid phone number")
@@ -70,14 +69,18 @@ public class User extends AbstractUser {
         return this;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public User setUsername(String username) {
-        this.username = username;
+    public User setEmail(String email) {
+        this.email = email;
         return this;
+    }
+
+    @Override
+    public String getUsername() {
+        return id;
     }
 
     public String getPhone() {

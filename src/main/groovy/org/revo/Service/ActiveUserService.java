@@ -2,6 +2,7 @@ package org.revo.Service;
 
 import org.revo.Domain.UserStats;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,4 +12,6 @@ public interface ActiveUserService {
     void mark(String user);
 
     Map<String, UserStats> getActiveUsers();
+
+    Map<String, UserStats> getActiveUsers(List<String> ids);
 }

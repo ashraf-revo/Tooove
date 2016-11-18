@@ -1,5 +1,6 @@
 package org.revo.Controller
 
+import org.revo.Service.ActiveUserService
 import org.revo.Service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*
 class UserController {
     @Autowired
     UserService userService
+    @Autowired
+    ActiveUserService activeUserService
 
     @Autowired
     Map<String, Boolean> onlineUsers
@@ -35,6 +38,16 @@ class UserController {
 
     @GetMapping("online/{id}")
     ResponseEntity online(@PathVariable String id) {
-        return (onlineUsers.get(userService.findOneById(id).username)) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build()
+        return (onlineUsers.get(id)) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build()
+    }
+
+    @GetMapping("active")
+    ResponseEntity AllActive() {
+        return ResponseEntity.ok(activeUserService.getActiveUsers())
+    }
+
+    @PostMapping("active")
+    ResponseEntity ManyActive(@RequestBody List<String> ids) {
+        return ResponseEntity.ok(activeUserService.getActiveUsers(ids))
     }
 }

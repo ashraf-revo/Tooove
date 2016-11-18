@@ -1,6 +1,6 @@
 cf create-service mLab sandbox Mongo
 cf create-service cleardb spark Mysql
-CREATE TABLE IF NOT EXISTS user (id CHAR(24) PRIMARY KEY NOT NULL,username TEXT,image TEXT);
+CREATE TABLE IF NOT EXISTS user (id CHAR(24) PRIMARY KEY NOT NULL,email TEXT,image TEXT);
 CREATE TABLE IF NOT EXISTS message ( id CHAR(24) PRIMARY KEY NOT NULL,content TEXT,createdate CHAR(13),
 from_id CHAR(24) NOT NULL,
 to_id CHAR(24) NOT NULL,

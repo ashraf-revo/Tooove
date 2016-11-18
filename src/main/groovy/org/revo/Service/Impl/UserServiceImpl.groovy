@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Query
-import org.springframework.data.mongodb.core.query.TextCriteria
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
@@ -45,9 +44,9 @@ public class UserServiceImpl implements UserService {
     @Override
     User create(User user) {
         isNull(user.id);
-        if (user.file&&user.file.length()>0) {
-            user.image=cloudinaryService.UploadUserImage(user.file);
-            user.file=""
+        if (user.file && user.file.length() > 0) {
+            user.image = cloudinaryService.UploadUserImage(user.file);
+            user.file = ""
         }
         user.password = passwordEncoder.encode(user.password);
         userRepository.save(user);
@@ -59,8 +58,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    Optional<User> findByUsername(String s) {
-        userRepository.findByUsername(s)
+    Optional<User> findByEmail(String s) {
+        userRepository.findByEmail(s)
     }
 
     @Override
@@ -73,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     List<User> search(String r) {
-        return userRepository.findByUsernameRegexOrNameRegexOrAboutRegexOrPhoneRegex(r,r,r,r)
+        return userRepository.findByEmailRegexOrNameRegexOrAboutRegexOrPhoneRegex(r, r, r, r)
     }
 
     @Override
@@ -100,7 +99,7 @@ public class UserServiceImpl implements UserService {
     OAuth2AccessToken createToken(User user, String pass) {
         String clientId = "revo";
         Map<String, String> param = new HashMap<String, String>();
-        param.put("username", user.username);
+        param.put("email", user.email);
         param.put("password", pass);
         param.put("client_id", clientId);
         param.put("client_secret", "revo");
@@ -108,7 +107,7 @@ public class UserServiceImpl implements UserService {
         OAuth2Request oAuth2Request = new OAuth2Request(param, clientId,
                 null, true, Arrays.asList("read", "write").toSet(),
                 null, null, null, null);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.username, pass);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.email, pass);
         OAuth2Authentication auth = new OAuth2Authentication(oAuth2Request, SecurityContextHolder.context.authentication = authenticationManager.authenticate(authenticationToken));
         return defaultTokenServices.createAccessToken(auth);
     }

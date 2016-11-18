@@ -33,7 +33,7 @@ class MainController {
                     .groupBy({ it.field })
             return ResponseEntity.badRequest().body(collect)
         }
-        if (userService.findByUsername(user.username).present) return ResponseEntity.badRequest().body([username: [[field: "username", defaultMessage: "please change your username"]]])
+        if (userService.findByEmail(user.email).present) return ResponseEntity.badRequest().body([email: [[field: "email", defaultMessage: "please change your email"]]])
         if (userService.findByPhone(user.phone).present) return ResponseEntity.badRequest().body([phone: [[field: "phone", defaultMessage: "please change your phone"]]])
         else {
             String pass = user.password
