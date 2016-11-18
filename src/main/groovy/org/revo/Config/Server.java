@@ -67,7 +67,7 @@ public class Server extends AuthorizationServerConfigurerAdapter {
         defaultTokenServices.setTokenStore(tokenStore);
         defaultTokenServices.setTokenEnhancer(tokenEnhancer());
         defaultTokenServices.setAccessTokenValiditySeconds(-1);
-        defaultTokenServices.setSupportRefreshToken(false);
+        defaultTokenServices.setSupportRefreshToken(true);
         return defaultTokenServices;
     }
 
