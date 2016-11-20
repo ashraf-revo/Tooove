@@ -3,7 +3,6 @@ package org.revo.Controller
 import org.revo.Domain.User
 import org.revo.Service.UserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.http.ResponseEntity
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.simp.SimpMessageSendingOperations
@@ -20,7 +19,6 @@ import java.security.Principal
  */
 @Controller
 @RequestMapping("api")
-@Cacheable
 class MainController {
     @Autowired
     UserService userService;
@@ -44,7 +42,7 @@ class MainController {
 
     @MessageMapping("/hello")
     public void greeting(Message message, Principal principal) throws Exception {
-        operations.convertAndSendToUser(principal.name,"/topic/greetings", message)
+        operations.convertAndSendToUser(principal.name, "/topic/greetings", message)
 
     }
     @Autowired
