@@ -12,4 +12,4 @@ applications:
   env:
     SPRING_PROFILES_ACTIVE: mysql,mongoonline
   services:
-  - pas-mysql
+  - Mysql
