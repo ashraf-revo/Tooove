@@ -1,4 +1,7 @@
----
+declared-services:
+  pas-mysql:
+    label: cleardb
+    plan: spark
 applications:
 - name: Tooove
   memory: 1G
@@ -9,4 +12,4 @@ applications:
   env:
     SPRING_PROFILES_ACTIVE: mysql,mongoonline
   services:
-  - Mysql
+  - pas-mysql
